@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Click Fast!</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;700&family=JetBrains+Mono:wght@400;600&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+
+  <!-- NAVIGATION -->
+  <nav id="nav">
+    <span class="logo">Click Fast!</span>
+    <button data-nav="home">Accueil</button>
+    <button data-nav="config">Jouer</button>
+    <button data-nav="history">Historique</button>
+  </nav>
+
+  <!-- VUE 1 : ACCUEIL -->
+  <section id="view-home" class="view active">
+    <h1>Click Fast!</h1>
+    <p>Vise. Clique. Bats ton record.</p>
+    <p id="best-score">Meilleur score : 0</p>
+    <button data-nav="config" class="btn-primary">Jouer</button>
+  </section>
+
+  <!-- VUE 2 : CONFIGURATION -->
+  <section id="view-config" class="view">
+    <h2>Configuration</h2>
+
+    <form id="config-form">
+      <label for="pseudo">Pseudo</label>
+      <input type="text" id="pseudo" maxlength="20" placeholder="2 à 20 caractères">
+      <p id="pseudo-error" class="error"></p>
+
+      <p>Mode</p>
+      <div id="mode-group" class="pill-group">
+        <button type="button" class="pill active" data-value="classique">Classique</button>
+        <button type="button" class="pill" data-value="precision">Précision</button>
+        <button type="button" class="pill" data-value="defi">Défi</button>
+      </div>
+
+      <p>Durée</p>
+      <div id="duration-group" class="pill-group">
+        <button type="button" class="pill active" data-value="10">10s</button>
+        <button type="button" class="pill" data-value="20">20s</button>
+        <button type="button" class="pill" data-value="30">30s</button>
+      </div>
+
+      <p>Difficulté</p>
+      <div id="difficulty-group" class="pill-group">
+        <button type="button" class="pill" data-value="facile">Facile</button>
+        <button type="button" class="pill active" data-value="moyenne">Moyenne</button>
+        <button type="button" class="pill" data-value="difficile">Difficile</button>
+      </div>
+
+      <button type="submit" id="start-btn" class="btn-primary">Lancer la partie</button>
+    </form>
+  </section>
+
+  <!-- VUE 3 : ARÈNE DE JEU -->
+  <section id="view-game" class="view">
+    <div id="hud">
+      <span>Temps : <span id="hud-time">10</span>s</span>
+      <span>Score : <span id="hud-score">0</span></span>
+      <span>Ratés : <span id="hud-misses">0</span></span>
+      <span>Précision : <span id="hud-accuracy">—</span></span>
+      <span>Record : <span id="hud-record">0</span></span>
+    </div>
+
+    <div id="arena">
+      <button id="target"></button>
+    </div>
+  </section>
+
+  <!-- VUE 4 : RÉSULTATS -->
+  <section id="view-results" class="view">
+    <h2>Partie terminée</h2>
+    <p id="record-badge" class="record-badge" hidden>Nouveau record !</p>
+    <p id="result-score" class="score-value">0</p>
+
+    <ul id="result-details">
+      <li>Mode : <span id="result-mode"></span></li>
+      <li>Difficulté : <span id="result-difficulty"></span></li>
+      <li>Ratés : <span id="result-misses"></span></li>
+      <li>Précision : <span id="result-accuracy"></span></li>
+    </ul>
+
+    <button data-nav="home" class="btn-secondary">Accueil</button>
+    <button data-nav="config" class="btn-primary">Rejouer</button>
+  </section>
+
+  <!-- VUE 5 : HISTORIQUE -->
+  <section id="view-history" class="view">
+    <h2>Historique</h2>
+
+    <div id="history-controls">
+      <div id="history-filter" class="pill-group">
+        <button type="button" class="pill active" data-value="tous">Tous</button>
+        <button type="button" class="pill" data-value="classique">Classique</button>
+        <button type="button" class="pill" data-value="precision">Précision</button>
+      </div>
+
+      <select id="history-sort">
+        <option value="date">Trier par date</option>
+        <option value="score">Trier par score</option>
+      </select>
+
+      <button id="clear-history" class="btn-danger">Effacer tout</button>
+    </div>
+
+    <table id="history-table">
+      <thead>
+        <tr>
+          <th>Date</th>
+          <th>Mode</th>
+          <th>Difficulté</th>
+          <th>Score</th>
+          <th>Précision</th>
+        </tr>
+      </thead>
+      <tbody id="history-body">
+        <!-- Lignes générées en JS -->
+      </tbody>
+    </table>
+
+    <p id="history-empty" hidden>Aucune partie enregistrée pour l'instant.</p>
+  </section>
+
+  <script src="js/main.js"></script>
+  <script src="js/game.js"></script>
+  <script src="js/target.js"></script>
+  <script src="js/timer.js"></script>
+</body>
+</html>
